@@ -1,4 +1,4 @@
-package com.example.javainstagramclone;
+package com.busra.javainstagramclone;
 
 import org.junit.Test;
 
