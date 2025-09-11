@@ -1,19 +1,15 @@
-package com.busra.javainstagramclone;
+package com.busra.javainstagramclone.view;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.ImageDecoder;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,11 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.busra.javainstagramclone.databinding.ActivityMainBinding;
 import com.busra.javainstagramclone.databinding.ActivityUploadBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,10 +30,8 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
 
 public class UploadActivity extends AppCompatActivity {
@@ -74,6 +64,8 @@ public class UploadActivity extends AppCompatActivity {
 
     }
 
+
+
     public void uploadButtonClicked(View view){
 
         if(imageData!=null){
@@ -82,7 +74,7 @@ public class UploadActivity extends AppCompatActivity {
             UUID uuid = UUID.randomUUID();
             String imageName = "images/" + uuid + ".jpg";
 
-            // Firebase stoage kısmına kolasör ekleme
+            // Firebase stoage kısmına kolasör ekleme ve Firebase'e veri yazma
             /*
             storageReference.child(imageName).putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -140,8 +132,10 @@ public class UploadActivity extends AppCompatActivity {
              */
 
             //----------------Fire Stroge Ücretli olduğu için kullanamıyoruz.------------------
-            // Bu nedenle url deneme olarak string gönderdim.
 
+
+
+            // Bu nedenle url deneme olarak string gönderdim.
             String downloadURL = "deneme";
 
             String comment = binding.commentText.getText().toString();
@@ -160,7 +154,7 @@ public class UploadActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
 
-                    Intent intent = new Intent(UploadActivity.this,FeedActivity.class);
+                    Intent intent = new Intent(UploadActivity.this, FeedActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
